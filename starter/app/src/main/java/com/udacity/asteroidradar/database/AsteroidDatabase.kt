@@ -1,13 +1,13 @@
 package com.udacity.asteroidradar.database
 
-import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.udacity.asteroidradar.Asteroid
+//import android.content.Context
+//import androidx.room.Database
+//import androidx.room.Room
+//import androidx.room.RoomDatabase
+//import com.udacity.asteroidradar.Asteroid
 
-@Database(entities = [Asteroid::class], version = 1, exportSchema = false)
-abstract class AsteroidDatabase : RoomDatabase() {
+//@Database(entities = [Asteroid::class], version = 1, exportSchema = false)
+/*abstract class AsteroidDatabase : RoomDatabase() {
 
     companion object{
         @Volatile
@@ -26,4 +26,4 @@ abstract class AsteroidDatabase : RoomDatabase() {
         }
 
     }
-}
+} */

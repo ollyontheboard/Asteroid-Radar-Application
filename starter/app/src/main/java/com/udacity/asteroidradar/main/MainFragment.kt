@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.AsteroidListAdapter
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
@@ -22,8 +24,23 @@ class MainFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        createList()
+
+      binding.asteroidRecycler.adapter =
+          AsteroidListAdapter(createList())
         return binding.root
     }
+
+    private fun createList(): List<Asteroid>{
+        val asteroidList :List<Asteroid> = listOf(Asteroid(codename = "56478", closeApproachDate = "2024-08-25", isPotentiallyHazardous = false),
+            Asteroid(codename = "56478", closeApproachDate = "2025-06-21", isPotentiallyHazardous = true),
+            Asteroid(codename = "56478", closeApproachDate = "2024-08-25", isPotentiallyHazardous = false)
+        )
+        return asteroidList
+
+    }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_overflow_menu, menu)
