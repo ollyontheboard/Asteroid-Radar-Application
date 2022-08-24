@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.databinding.AsteroidItemBinding
 
-class AsteroidListAdapter(val asteroidList: List<Asteroid>): RecyclerView.Adapter<AsteroidListAdapter.AsteroidViewHolder>() {
-
+class AsteroidListAdapter: RecyclerView.Adapter<AsteroidListAdapter.AsteroidViewHolder>() {
+    var asteroidList = listOf<Asteroid>()
 
     class AsteroidViewHolder private constructor(val binding: AsteroidItemBinding): RecyclerView.ViewHolder(binding.root){
          fun bind(

@@ -6,10 +6,14 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface NasaApiService {
-    @GET("neo/rest/v1/feed?start_date=2022-08-30&end_date=2022-09-06&api_key=HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
-    fun getAsteroids(): Call<String>
+    @GET("neo/rest/v1/feed")
+ suspend fun getAsteroids(
+        @Query("start_date") startDate: String,
+        @Query("api_key") key: String
+   ): String
 
 }
 private val retrofit = Retrofit.Builder()
