@@ -30,9 +30,7 @@ class MainFragment : Fragment() {
 
 
       binding.asteroidRecycler.adapter = adapter
-        viewModel.response.observe(viewLifecycleOwner, Observer {
-            adapter.asteroidList = it
-        })
+            adapter.asteroidList = viewModel.asteroidList
 
         return binding.root
     }

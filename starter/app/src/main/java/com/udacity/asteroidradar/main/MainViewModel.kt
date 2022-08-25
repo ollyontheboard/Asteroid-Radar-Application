@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
     private val _response = MutableLiveData<List<Asteroid>>()
     val response : LiveData<List<Asteroid>>
     get() = _response
+    var asteroidList = mutableListOf<Asteroid>()
 
     private val _fromNasa = MutableLiveData<String>()
     val fromNasa : LiveData<String>
@@ -56,7 +57,7 @@ class MainViewModel : ViewModel() {
         //enqueue takes callback class as parameter which has methods to be called in success or failure
       viewModelScope.launch {
           val networkResponse =  NasaApi.retrofitservice.getAsteroids(getToday(), key = "HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
-          _response.value = parseAsteroidsJsonResult(JSONObject(networkResponse))
+          asteroidList = parseAsteroidsJsonResult(JSONObject(networkResponse))
 
       }
 
