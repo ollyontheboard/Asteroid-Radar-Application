@@ -2,20 +2,24 @@ package com.udacity.asteroidradar
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.databinding.AsteroidItemBinding
 
-class AsteroidListAdapter: RecyclerView.Adapter<AsteroidListAdapter.AsteroidViewHolder>() {
-    var asteroidList = listOf<Asteroid>()
+class AsteroidListAdapter(val clickListener : AsteroidListener): ListAdapter<Asteroid, AsteroidListAdapter.AsteroidViewHolder>(AsteroidListDiffCallBack()) {
+
 
     class AsteroidViewHolder private constructor(val binding: AsteroidItemBinding): RecyclerView.ViewHolder(binding.root){
          fun bind(
-            item: Asteroid
+            item: Asteroid,
+            clickListener: AsteroidListener
         ) {
             binding.apply {
-                codenameTv.text = item.codename
-                approachDateTv.text = item.closeApproachDate
+                asteroid = item
+                clicklistener = clickListener
                 bindAsteroidStatusImage(this.hazardImage, item.isPotentiallyHazardous)
+
             }
         }
         //encapsulate view inflation in companion object so it can only be called with viewholder class
@@ -34,16 +38,24 @@ class AsteroidListAdapter: RecyclerView.Adapter<AsteroidListAdapter.AsteroidView
     }
 
     override fun onBindViewHolder(holder: AsteroidViewHolder, position: Int) {
-        val item = asteroidList[position]
-        holder.bind(item)
+        val item = getItem(position)
+        holder.bind(item,clickListener)
 
 
 
     }
+}
 
+class AsteroidListDiffCallBack : DiffUtil.ItemCallback<Asteroid>() {
+    override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+       return oldItem.id==newItem.id
+    }
 
+    override fun areContentsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+       return oldItem==newItem
+    }
 
-    override fun getItemCount(): Int = asteroidList.size
-
-
+}
+class AsteroidListener(val clickListener: (asteroid: Asteroid)-> Unit){
+    fun onClick(asteroid: Asteroid)= clickListener(asteroid)
 }

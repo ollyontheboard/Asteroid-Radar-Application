@@ -5,20 +5,29 @@
     <variable
         name="viewModel"
         type="com.udacity.asteroidradar.main.MainViewModel" />
+    <variable
+        name="clicklistener"
+        type="com.udacity.asteroidradar.AsteroidListener" />
+    <variable
+        name="asteroid"
+        type="com.udacity.asteroidradar.Asteroid" />
 </data>
 
 
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/asteroid_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:onClick="@{()->clicklistener.onClick(asteroid)}"
+    >
 
 
 
     <TextView
         android:id="@+id/codename_Tv"
-        android:text="This the code"
+        android:text="@{asteroid.codename}"
         android:textColor="@color/default_text_color"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginBottom="16dp"
-        android:text="This is the date"
+        android:text="@{asteroid.closeApproachDate}"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

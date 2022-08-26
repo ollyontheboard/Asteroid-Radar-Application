@@ -9,10 +9,7 @@ import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import kotlinx.coroutines.launch
-
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,11 +18,10 @@ class MainViewModel : ViewModel() {
     private val _response = MutableLiveData<List<Asteroid>>()
     val response : LiveData<List<Asteroid>>
     get() = _response
-    var asteroidList = mutableListOf<Asteroid>()
+    private val _navigateToDetails = MutableLiveData<Asteroid>()
+    val navigateToDetails : LiveData<Asteroid>
+    get() = _navigateToDetails
 
-    private val _fromNasa = MutableLiveData<String>()
-    val fromNasa : LiveData<String>
-    get() = _fromNasa
 
     init {
         viewModelScope.launch {
@@ -57,9 +53,16 @@ class MainViewModel : ViewModel() {
         //enqueue takes callback class as parameter which has methods to be called in success or failure
       viewModelScope.launch {
           val networkResponse =  NasaApi.retrofitservice.getAsteroids(getToday(), key = "HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
-          asteroidList = parseAsteroidsJsonResult(JSONObject(networkResponse))
+          _response.value = parseAsteroidsJsonResult(JSONObject(networkResponse))
 
       }
 
     }
+    fun onAsteroidClicked(asteroid: Asteroid){
+        _navigateToDetails.value = asteroid
+    }
+    fun doneClick(){
+        _navigateToDetails.value = null
+    }
+
 }
