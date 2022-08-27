@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar.api
 
 import com.udacity.asteroidradar.Constants.BASE_URL
+import com.udacity.asteroidradar.PictureOfDay
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -15,7 +16,10 @@ interface NasaApiService {
         @Query("api_key") key: String
    ): String
 
+
 }
+
+
 private val retrofit = Retrofit.Builder()
    .addConverterFactory(ScalarsConverterFactory.create())
     .baseUrl(BASE_URL)

@@ -52,17 +52,6 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private fun createList(): List<Asteroid>{
-        val asteroidList :List<Asteroid> =
-
-            listOf(Asteroid(codename = "56478", closeApproachDate = "2024-08-25", isPotentiallyHazardous = false),
-            Asteroid(codename = "56478", closeApproachDate = "2025-06-21", isPotentiallyHazardous = true),
-            Asteroid(codename = "56478", closeApproachDate = "2024-08-25", isPotentiallyHazardous = false)
-        )
-        return asteroidList
-
-    }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

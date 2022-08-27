@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.PictureOfDay
+import com.udacity.asteroidradar.api.ImageApi
 import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import kotlinx.coroutines.launch
@@ -21,26 +23,28 @@ class MainViewModel : ViewModel() {
     private val _navigateToDetails = MutableLiveData<Asteroid>()
     val navigateToDetails : LiveData<Asteroid>
     get() = _navigateToDetails
+    private val _picOfToday = MutableLiveData<PictureOfDay>()
+    val picOfToday : LiveData<PictureOfDay>
+    get() = _picOfToday
 
 
     init {
         viewModelScope.launch {
             showAsteroids()
+           getTodayPic()
         }
 
 
     }
 
-    private fun initializeData() {
-        _response.value =
-
-            listOf(Asteroid(codename = "56478", closeApproachDate = "2024-08-25", isPotentiallyHazardous = false),
-                Asteroid(codename = "56478", closeApproachDate = "2025-06-21", isPotentiallyHazardous = true),
-                Asteroid(codename = "56478", closeApproachDate = "2024-08-25", isPotentiallyHazardous = false)
-            )
-
+    suspend fun getTodayPic() {
+        viewModelScope.launch {
+            val networkResponse = ImageApi.retrofitService.getPictureofTheDay("HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
+            _picOfToday.value = networkResponse
+        }
 
     }
+
     private fun getToday(): String {
         val calendar = Calendar.getInstance()
         val currentTime = calendar.time
