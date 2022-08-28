@@ -19,9 +19,8 @@ import java.util.*
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val _response = MutableLiveData<List<Asteroid>>()
-    var response : LiveData<List<Asteroid>>
-    get() = _response
+
+
     private val _navigateToDetails = MutableLiveData<Asteroid>()
     val navigateToDetails : LiveData<Asteroid>
     get() = _navigateToDetails
@@ -31,10 +30,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = AsteroidDatabase.getInstance(application)
     private val asteroidRepo = AsteroidRepository(database)
+    var response : LiveData<List<Asteroid>> = asteroidRepo.asteroids
 
 
 
-    init {
+
+            init {
         try {
             viewModelScope.launch {
                 getTodayPic()
@@ -46,7 +47,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
         }
 
-        response = asteroidRepo.asteroids
+
 
 
     }

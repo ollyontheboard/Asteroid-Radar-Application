@@ -7,13 +7,22 @@ import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 
 @BindingAdapter("imageOfTheDay")
-fun bindImageOfDay(imgView: ImageView, url: String?){
-    url?.let {
-        val uri = it.toUri().buildUpon().scheme("https").build()
-        Picasso.with(imgView.context)
-            .load(uri)
-            .into(imgView)
+fun bindImageOfDay(imgView: ImageView, pic: PictureOfDay?){
+
+    if(pic?.mediaType=="image"){
+        pic?.url?.let {
+            val uri = it.toUri().buildUpon().scheme("https").build()
+            Picasso.with(imgView.context)
+                .load(uri)
+                .into(imgView)
+        }
+
     }
+    else if(pic?.mediaType=="video"){
+        imgView.setImageResource(R.drawable.ic_status_normal)
+    }
+
+
 
 
 }
