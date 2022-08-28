@@ -8,6 +8,7 @@ import com.udacity.asteroidradar.database.AsteroidDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,10 +24,17 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     suspend fun refreshAsteroids(){
         //Writing to daatabase is an input operation so IO Dispatcher
         withContext(Dispatchers.IO){
-            val asteroids = parseAsteroidsJsonResult(JSONObject(
-                NasaApi.retrofitservice.getAsteroids(getToday(),key="HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
-            ))
-            database.asteroidDatabaseDao.addAsteroids(*asteroids.asDatabaseModel())
+            try {
+                val asteroids = parseAsteroidsJsonResult(JSONObject(
+                    NasaApi.retrofitservice.getAsteroids(getToday(),key="HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
+                ))
+                database.asteroidDatabaseDao.addAsteroids(*asteroids.asDatabaseModel())
+
+            }
+            catch (e:Exception){
+
+            }
+
 
         }
     }

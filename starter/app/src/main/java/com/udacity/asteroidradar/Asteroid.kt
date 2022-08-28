@@ -10,19 +10,19 @@ import kotlinx.android.parcel.Parcelize
 @Entity(tableName = "asteroid_table")
 data class DatabaseAsteroid(
     @PrimaryKey
-    val id: Long = 0L,
+    val id: Long ,
     @ColumnInfo(name="asteroid_codename")
     val codename: String,
     @ColumnInfo(name="asteroid_approach_date")
     val closeApproachDate: String,
      @ColumnInfo(name="asteroid_magnitude")
-    val absoluteMagnitude: Double= 0.0,
+    val absoluteMagnitude: Double,
     @ColumnInfo(name="asteroid_diameter")
-    val estimatedDiameter: Double = 0.0,
+    val estimatedDiameter: Double ,
     @ColumnInfo(name="asteroid_relative_velocity")
-    val relativeVelocity: Double= 0.0,
-     @ColumnInfo(name="asteroid_codename")
-    val distanceFromEarth: Double= 0.0,
+    val relativeVelocity: Double,
+     @ColumnInfo(name="asteroid_distance")
+    val distanceFromEarth: Double,
      @ColumnInfo(name="asteroid_is_hazardous")
     val isPotentiallyHazardous: Boolean)
 
@@ -30,13 +30,13 @@ data class DatabaseAsteroid(
 //Domain object, used to display in ui. Should be separate from database object
 @Parcelize
 data class Asteroid(
-val id: Long = 0L,
+val id: Long ,
 val codename: String,
 val closeApproachDate: String,
-val absoluteMagnitude: Double= 0.0,
-val estimatedDiameter: Double = 0.0,
-val relativeVelocity: Double= 0.0,
-val distanceFromEarth: Double= 0.0,
+val absoluteMagnitude: Double,
+val estimatedDiameter: Double ,
+val relativeVelocity: Double,
+val distanceFromEarth: Double,
 val isPotentiallyHazardous: Boolean) : Parcelable
 
 //function to convert database object to domain model

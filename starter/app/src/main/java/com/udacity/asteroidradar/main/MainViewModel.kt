@@ -1,6 +1,7 @@
 package com.udacity.asteroidradar.main
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.AsteroidRepository
@@ -12,6 +13,7 @@ import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.AsteroidDatabase
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,9 +35,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     init {
-        viewModelScope.launch {
-           getTodayPic()
-            asteroidRepo.refreshAsteroids()
+        try {
+            viewModelScope.launch {
+                getTodayPic()
+                asteroidRepo.refreshAsteroids()
+            }
+        }
+        catch (e: Exception){
+            Log.e("InitNetworkCall", e.message!!)
+
         }
 
         response = asteroidRepo.asteroids
