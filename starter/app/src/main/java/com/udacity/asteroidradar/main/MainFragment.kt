@@ -40,6 +40,8 @@ class MainFragment : Fragment() {
             } })
 
         binding.asteroidRecycler.adapter = adapter
+        viewModel.response.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it) })
 
         return binding.root
     }
