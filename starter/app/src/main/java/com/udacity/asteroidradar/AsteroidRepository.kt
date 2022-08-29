@@ -29,14 +29,10 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
                     NasaApi.retrofitservice.getAsteroids(getToday(),key="HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
                 ))
                 database.asteroidDatabaseDao.addAsteroids(*asteroids.asDatabaseModel())
-
             }
             catch (e:Exception){
 
-            }
-
-
-        }
+            } }
     }
     private fun getToday(): String {
         val calendar = Calendar.getInstance()

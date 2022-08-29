@@ -13,7 +13,11 @@ interface AsteroidDatabaseDao {
     //when getting new asteroids from api, conflict strategy is to replace asteroids with same id
 @Insert(onConflict = OnConflictStrategy.REPLACE)
 fun addAsteroids(vararg  asteroids: DatabaseAsteroid)
-@Query("SELECT * FROM asteroid_table")
+@Query("SELECT * FROM asteroid_table ORDER BY asteroid_approach_date ASC")
  fun getAllAsteroids():LiveData<List<DatabaseAsteroid>>
+ @Query("SELECT * FROM asteroid_table WHERE asteroid_approach_date = :today")
+ fun getTodayAsteroids(today: String)
+    @Query("SELECT * FROM asteroid_table WHERE asteroid_approach_date >= :today ORDER BY asteroid_approach_date ASC")
+    fun getWeekAsteroids(today: String)
 
 }

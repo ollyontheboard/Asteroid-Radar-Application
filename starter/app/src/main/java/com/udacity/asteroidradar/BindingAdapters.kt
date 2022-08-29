@@ -16,7 +16,6 @@ fun bindImageOfDay(imgView: ImageView, pic: PictureOfDay?){
                 .load(uri)
                 .into(imgView)
         }
-
     }
     else if(pic?.mediaType=="video"){
         imgView.setImageResource(R.drawable.ic_status_normal)
