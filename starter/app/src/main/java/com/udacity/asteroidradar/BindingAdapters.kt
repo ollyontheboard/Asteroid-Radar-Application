@@ -14,11 +14,12 @@ fun bindImageOfDay(imgView: ImageView, pic: PictureOfDay?){
             val uri = it.toUri().buildUpon().scheme("https").build()
             Picasso.with(imgView.context)
                 .load(uri)
+                .placeholder(R.drawable.placeholder_picture_of_day)
                 .into(imgView)
         }
     }
     else if(pic?.mediaType=="video"){
-        imgView.setImageResource(R.drawable.ic_status_normal)
+        imgView.setImageResource(R.drawable.placeholder_picture_of_day)
     }
 
 

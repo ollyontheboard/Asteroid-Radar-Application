@@ -16,8 +16,8 @@ fun addAsteroids(vararg  asteroids: DatabaseAsteroid)
 @Query("SELECT * FROM asteroid_table ORDER BY asteroid_approach_date ASC")
  fun getAllAsteroids():LiveData<List<DatabaseAsteroid>>
  @Query("SELECT * FROM asteroid_table WHERE asteroid_approach_date = :today")
- fun getTodayAsteroids(today: String)
+ fun getTodayAsteroids(today: String):LiveData<List<DatabaseAsteroid>>
     @Query("SELECT * FROM asteroid_table WHERE asteroid_approach_date >= :today ORDER BY asteroid_approach_date ASC")
-    fun getWeekAsteroids(today: String)
+    fun getWeekAsteroids(today: String):LiveData<List<DatabaseAsteroid>>
 
 }

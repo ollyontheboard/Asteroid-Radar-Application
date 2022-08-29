@@ -45,19 +45,27 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         catch (e: Exception){
             Log.e("InitNetworkCall", e.message!!)
 
-        }
-
-
-
-
-    }
+        } }
 
     suspend fun getTodayPic() {
         viewModelScope.launch {
-            val networkResponse = ImageApi.retrofitService.getPictureofTheDay("HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
-            _picOfToday.value = networkResponse
-        }
+            try {
+                val networkResponse = ImageApi.retrofitService.getPictureofTheDay("HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
+                _picOfToday.value = networkResponse
+            }
+            catch (e: Exception){
 
+            } }
+    }
+
+    fun toWeekAsteroids(){
+        response = asteroidRepo.weekAsteroids
+    }
+    fun todayAsteroids(){
+        response = asteroidRepo.todayAsteroids
+    }
+    fun toSavedAsteroids(){
+        response = asteroidRepo.asteroids
     }
 
 

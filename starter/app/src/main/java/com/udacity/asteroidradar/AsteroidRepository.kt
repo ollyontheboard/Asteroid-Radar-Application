@@ -18,6 +18,12 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
     val asteroids : LiveData<List<Asteroid>> = Transformations.map(database.asteroidDatabaseDao.getAllAsteroids()){
         it.asDomainModel()
     }
+    val todayAsteroids: LiveData<List<Asteroid>> = Transformations.map(database.asteroidDatabaseDao.getTodayAsteroids(getToday())){
+        it.asDomainModel()
+    }
+    val weekAsteroids: LiveData<List<Asteroid>> = Transformations.map(database.asteroidDatabaseDao.getWeekAsteroids(getToday())){
+        it.asDomainModel()
+    }
 
 
  //function to update asteroid database
