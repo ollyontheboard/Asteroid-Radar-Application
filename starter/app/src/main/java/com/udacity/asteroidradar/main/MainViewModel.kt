@@ -3,7 +3,10 @@ package com.udacity.asteroidradar.main
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
-import com.udacity.asteroidradar.*
+import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.AsteroidRepository
+import com.udacity.asteroidradar.Constants
+import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.ImageApi
 import com.udacity.asteroidradar.api.NasaApi
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
@@ -47,13 +50,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     suspend fun getTodayPic() {
         viewModelScope.launch {
             try {
-                val networkResponse = ImageApi.retrofitService.getPictureofTheDay(BuildConfig.API_KEY)
+                val networkResponse = ImageApi.retrofitService.getPictureofTheDay("HXmvjmeWkFttStMWa2UZ8boWKSEhVEYkbTttuHHV")
                 _picOfToday.value = networkResponse
             }
             catch (e: Exception){
 
             } }
     }
+
     fun toWeekAsteroids(){
         response = asteroidRepo.weekAsteroids
     }
